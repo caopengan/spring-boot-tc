@@ -27,6 +27,13 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.tc.entity
 
+### log setting ###
+logging:
+  config: classpath:logger/logback.xml
+  path: D:/spring-boot-tc-log
+
+
+
 
 
 
