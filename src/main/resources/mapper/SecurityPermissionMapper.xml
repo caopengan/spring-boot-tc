@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tc.mapper.SecurityPermissionMapper" >
+    <!-- 字段与实体的映射 -->
+    <resultMap id="BaseResultMap" type="com.tc.entity.SecurityPermission">
+        <id column="permissionId" property="groupId" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 根据条件查询，全部 -->
+    <select id="searchAll" resultMap="BaseResultMap">
+        select * from security_permission
+    </select>
+
+</mapper>

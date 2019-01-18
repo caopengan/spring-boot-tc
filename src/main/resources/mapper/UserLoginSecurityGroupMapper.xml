@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tc.mapper.UserLoginSecurityGroupMapper" >
+    <!-- 字段与实体的映射 -->
+    <resultMap id="BaseResultMap" type="com.tc.entity.UserLoginSecurityGroup">
+        <id column="userLoginId" property="userLoginId" jdbcType="VARCHAR" />
+        <id column="groupId" property="groupId" jdbcType="VARCHAR" />
+        <id column="fromDate" property="fromDate" jdbcType="timestamp" />
+        <result column="thruDate" property="thruDate" jdbcType="timestamp" />
+    </resultMap>
+    <!-- 根据条件查询，全部 -->
+    <select id="searchAll" resultMap="BaseResultMap">
+        select * from user_login_security_group
+    </select>
+
+</mapper>
