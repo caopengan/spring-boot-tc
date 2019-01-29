@@ -5,8 +5,8 @@
     <resultMap id="BaseResultMap" type="com.tc.entity.SecurityGroupPermission">
         <id column="permissionId" property="userLoginId" jdbcType="VARCHAR" />
         <id column="groupId" property="groupId" jdbcType="VARCHAR" />
-        <id column="fromDate" property="fromDate" jdbcType="timestamp" />
-        <result column="thruDate" property="thruDate" jdbcType="timestamp" />
+        <id column="fromDate" property="fromDate" jdbcType="TIMESTAMP" />
+        <result column="thruDate" property="thruDate" jdbcType="TIMESTAMP" />
     </resultMap>
     <!-- 根据条件查询，全部 -->
     <select id="searchAll" resultMap="BaseResultMap">

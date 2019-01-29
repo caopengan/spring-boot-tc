@@ -2,9 +2,9 @@
 spring:
     datasource:
         name: TradeCenter_1_0
-        url: jdbc:postgresql://192.168.1.9/TradeCenter_1_0
-        username: erp7jia2
-        password: erp7jia2
+        url: jdbc:postgresql://127.0.0.1/postgres
+        username: postgres
+        password: root
         #druid
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: org.postgresql.Driver
@@ -31,6 +31,10 @@ mybatis:
 logging:
   config: classpath:logger/logback.xml
   path: D:/spring-boot-tc-log
+  level:
+    com.tc.mapper:
+                  debug
+
 
 
 

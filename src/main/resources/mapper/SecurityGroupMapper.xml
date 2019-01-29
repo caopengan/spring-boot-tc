@@ -3,12 +3,12 @@
 <mapper namespace="com.tc.mapper.SecurityGroupMapper" >
     <!-- 字段与实体的映射 -->
     <resultMap id="BaseResultMap" type="com.tc.entity.SecurityGroup">
-        <id column="groupId" property="groupId" jdbcType="VARCHAR" />
-        <result column="groupName" property="groupName" jdbcType="VARCHAR" />
+        <id column="group_id" property="groupId" jdbcType="VARCHAR" />
+        <result column="group_name" property="groupName" jdbcType="VARCHAR" />
         <result column="description" property="description" jdbcType="VARCHAR" />
     </resultMap>
     <!-- 根据条件查询，全部 -->
-    <select id="searchAll" resultMap="BaseResultMap">
+    <select id="searchAllSecurityGroup" resultMap="BaseResultMap">
         select * from security_group
     </select>
 

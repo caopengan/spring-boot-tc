@@ -7,4 +7,6 @@ import java.util.List;
 public interface UserService {
 
     List<UserLogin> searchAllUsers();
+
+    UserLogin searchUserById(String userName);
 }

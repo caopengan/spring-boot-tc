@@ -14,4 +14,6 @@ public interface UserLoginMapper {
 //            @Result(property = "userLoginId",  column = "user_login_id")
 //    })
     List<UserLogin> searchAll();
+
+    UserLogin searchUserById(String userName);
 }

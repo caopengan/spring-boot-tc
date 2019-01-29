@@ -3,14 +3,23 @@
 <mapper namespace="com.tc.mapper.UserLoginSecurityGroupMapper" >
     <!-- 字段与实体的映射 -->
     <resultMap id="BaseResultMap" type="com.tc.entity.UserLoginSecurityGroup">
-        <id column="userLoginId" property="userLoginId" jdbcType="VARCHAR" />
-        <id column="groupId" property="groupId" jdbcType="VARCHAR" />
-        <id column="fromDate" property="fromDate" jdbcType="timestamp" />
-        <result column="thruDate" property="thruDate" jdbcType="timestamp" />
+        <id column="user_login_id" property="userLoginId" jdbcType="VARCHAR" />
+        <id column="group_id" property="groupId" jdbcType="VARCHAR" />
+        <id column="from_date" property="fromDate" jdbcType="TIMESTAMP" />
+        <result column="thru_date" property="thruDate" jdbcType="TIMESTAMP" />
     </resultMap>
+    
+    <sql id="Base_Column_List">
+        user_login_id,group_id,from_date,thru_date
+    </sql>
+    
     <!-- 根据条件查询，全部 -->
     <select id="searchAll" resultMap="BaseResultMap">
-        select * from user_login_security_group
+        select <include refid="Base_Column_List"/> from user_login_security_group
+    </select>
+
+    <select id="selectSecurityGroupsByUserId" resultMap="BaseResultMap" parameterType="String">
+        select <include refid="Base_Column_List"/> from user_login_security_group where user_login_id = #{userName}
     </select>
 
 </mapper>

@@ -1,6 +1,9 @@
 package com.tc.entity;
 
-public class SecurityGroup {
+import java.io.Serializable;
+
+public class SecurityGroup implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String groupId;
     private String groupName;
     private String description;

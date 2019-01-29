@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService{
     public List<UserLogin> searchAllUsers() {
         return userLoginMapper.searchAll();
     }
+
+    @Override
+    public UserLogin searchUserById(String userName) {
+        return userLoginMapper.searchUserById(userName);
+    }
 }

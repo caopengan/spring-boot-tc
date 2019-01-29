@@ -3,16 +3,20 @@
 <mapper namespace="com.tc.mapper.UserLoginMapper" >
     <!-- 字段与实体的映射 -->
     <resultMap id="BaseResultMap" type="com.tc.entity.UserLogin">
-        <id column="userLoginId" property="userLoginId" jdbcType="VARCHAR" />
-        <result column="currentPassword" property="currentPassword" jdbcType="VARCHAR" />
+        <id column="user_login_id" property="userLoginId" jdbcType="VARCHAR" />
+        <result column="current_password" property="currentPassword" jdbcType="VARCHAR" />
         <result column="enabled" property="enabled" jdbcType="VARCHAR" />
-        <result column="partyId" property="partyId" jdbcType="VARCHAR" />
-        <result column="telephoneNumber" property="telephoneNumber" jdbcType="VARCHAR" />
+        <result column="party_id" property="partyId" jdbcType="VARCHAR" />
+        <result column="telephone_number" property="telephoneNumber" jdbcType="VARCHAR" />
         <result column="openid" property="openid" jdbcType="VARCHAR" />
     </resultMap>
     <!-- 根据条件查询，全部 -->
     <select id="searchAll" resultMap="BaseResultMap">
         select * from user_login
+    </select>
+
+    <select id="searchUserById" parameterType="String" resultMap="BaseResultMap">
+        select * from user_login where user_login_id = #{userName}
     </select>
 
 </mapper>
