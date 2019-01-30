@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tc.mapper.UserMapper" >
+    <!-- 字段与实体的映射 -->
+    <resultMap id="BaseResultMap" type="com.tc.entity.User">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_name,password,telephone,email
+    </sql>
+
+    <!-- 根据条件查询，全部 -->
+    <select id="searchAllUsers" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from users
+    </select>
+
+    <!-- 根据条件查询 -->
+    <select id="searchUserByUserName" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from users where user_name = #{userName} or telephone = #{userName} or email = #{userName}
+    </select>
+
+</mapper>

@@ -1,8 +1,7 @@
 package com.tc.serviceImpl;
 
-import com.tc.entity.SecurityGroup;
-import com.tc.entity.UserLogin;
-import com.tc.entity.UserLoginSecurityGroup;
+import com.tc.entity.User;
+import com.tc.entity.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +11,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserDetailsImpl implements UserDetails{
+
+    //返回用户所有角色的封装，一个Role对应一个GrantedAuthority
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        for(UserLoginSecurityGroup sg :userLoginSecurityGroup){
-            authorities.add(new SimpleGrantedAuthority(sg.getGroupId()));
+        for(UserRole userRole :userRoles){
+            authorities.add(new SimpleGrantedAuthority(userRole.getRoleId()));
         }
         return authorities;
     }
@@ -58,20 +59,21 @@ public class UserDetailsImpl implements UserDetails{
 
     private String userName;
     private String passWord;
-    List<UserLoginSecurityGroup> userLoginSecurityGroup;
+    //包含着用户对应的所有Role，在使用时调用者给对象注入roles
+    List<UserRole> userRoles;
 
     public UserDetailsImpl() {
     }
 
-    public UserDetailsImpl(UserLogin userLogin) {
-        this.userName = userLogin.getUserLoginId();
-        this.passWord = userLogin.getCurrentPassword();
+    public UserDetailsImpl(User user) {
+        this.userName = user.getUserName();
+        this.passWord = user.getPassword();
     }
 
-    public UserDetailsImpl(UserLogin userLogin,List<UserLoginSecurityGroup> userLoginSecurityGroup) {
-        this.userName = userLogin.getUserLoginId();
-        this.passWord = userLogin.getCurrentPassword();
-        this.userLoginSecurityGroup = userLoginSecurityGroup;
+    public UserDetailsImpl(User user,List<UserRole> userRoles) {
+        this.userName = user.getUserName();
+        this.passWord = user.getPassword();
+        this.userRoles = userRoles;
     }
 
     public String getUserName() {
@@ -90,11 +92,11 @@ public class UserDetailsImpl implements UserDetails{
         this.passWord = passWord;
     }
 
-    public List<UserLoginSecurityGroup> getUserLoginSecurityGroup() {
-        return userLoginSecurityGroup;
+    public List<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserLoginSecurityGroup(List<UserLoginSecurityGroup> userLoginSecurityGroup) {
-        this.userLoginSecurityGroup = userLoginSecurityGroup;
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }

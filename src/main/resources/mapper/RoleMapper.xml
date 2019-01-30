@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tc.mapper.RoleMapper" >
+    <!-- 字段与实体的映射 -->
+    <resultMap id="BaseResultMap" type="com.tc.entity.Role">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="role_name_zh" property="roleNameZh" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="QueryRoleResourceResultMap" type="com.tc.entity.Role">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="role_name_zh" property="roleNameZh" jdbcType="VARCHAR" />
+        <collection property="roleResources" javaType="java.util.List" ofType="com.tc.entity.RoleResource">
+            <id column="id" property="id" jdbcType="VARCHAR" />
+            <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+            <result column="resource_id" property="resourceId" jdbcType="VARCHAR" />
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,role_name,role_name_zh
+    </sql>
+
+    <!-- 根据条件查询，全部 -->
+    <select id="searchAllRoles" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List" /> from role
+    </select>
+
+    <select id="getRolesByResourceId" parameterType="String" resultMap="QueryRoleResourceResultMap">
+        select r.id,r.role_name,r.role_name_zh,rr.resource_id from role r join role_resource rr on r.id = rr.role_id where rr.resource_id = #{resourceId}
+    </select>
+
+</mapper>

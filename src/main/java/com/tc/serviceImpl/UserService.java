@@ -1,7 +1,7 @@
 package com.tc.serviceImpl;
 
-import com.tc.entity.UserLogin;
-import com.tc.service.UserLoginSecurityGroupService;
+import com.tc.entity.User;
+import com.tc.service.UserRoleService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,18 +16,18 @@ public class UserService implements UserDetailsService{
     private com.tc.service.UserService userService;
 
     @Resource
-    private UserLoginSecurityGroupService userLoginSecurityGroupService;
+    private UserRoleService userRoleService;
 
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        UserLogin userLogin = userService.searchUserById(s);
-        if(userLogin == null){
+        User user = userService.searchUserByUserName(s);
+        if(user == null){
             throw new UsernameNotFoundException("没有该用户："+s);
         }
 
         //查到User后将其封装为UserDetails的实现类的实例供程序调用
         //用该User和它对应的Role实体们构造UserDetails的实现类
-        return new UserDetailsImpl(userLogin,userLoginSecurityGroupService.selectSecurityGroupsByUserId(userLogin.getUserLoginId()));
+        return new UserDetailsImpl(user,userRoleService.getRolesByUserId(user.getId()));
     }
 }
