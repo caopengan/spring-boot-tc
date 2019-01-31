@@ -1,13 +1,17 @@
 package com.tc.config;
 
+import com.tc.component.AccessDecisionManagerImpl;
+import com.tc.component.FilterInvocationSecurityMetadataSourceImpl;
 import com.tc.component.MyAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -24,18 +28,25 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@Configuration
+@EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected UserDetailsService userDetailsService() {
+        return super.userDetailsService();
+    }
 
     @Autowired
     private UserDetailsService userDetailsService;
 
     //根据一个url请求，获得访问它所需要的roles权限
     @Autowired
-    MyFilterInvocationSecurityMetadataSource myFilterInvocationSecurityMetadataSource;
+    FilterInvocationSecurityMetadataSourceImpl myFilterInvocationSecurityMetadataSource;
 
     //接收一个用户的信息和访问一个url所需要的权限，判断该用户是否可以访问
     @Autowired
-    MyAccessDecisionManager myAccessDecisionManager;
+    AccessDecisionManagerImpl myAccessDecisionManager;
 
     //403页面
     @Autowired

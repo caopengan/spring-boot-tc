@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService{
 
 //    @Resource

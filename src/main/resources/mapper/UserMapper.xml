@@ -8,10 +8,11 @@
         <result column="password" property="password" jdbcType="VARCHAR" />
         <result column="telephone" property="telephone" jdbcType="VARCHAR" />
         <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="register_date" property="registerDate" jdbcType="TIMESTAMP"></result>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,user_name,password,telephone,email
+        id,user_name,password,telephone,email,register_date
     </sql>
 
     <!-- 根据条件查询，全部 -->

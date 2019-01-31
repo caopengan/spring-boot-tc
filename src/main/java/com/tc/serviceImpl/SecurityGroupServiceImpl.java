@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-@Service("securityGroup")
-public class SecurityGroupImpl implements SecurityGroupService{
+@Service("securityGroupService")
+public class SecurityGroupServiceImpl implements SecurityGroupService{
 
     @Resource
     private SecurityGroupMapper securityGroupMapper;

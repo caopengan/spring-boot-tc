@@ -2,6 +2,7 @@ package com.tc.serviceImpl;
 
 import com.tc.entity.User;
 import com.tc.service.UserRoleService;
+import com.tc.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-@Service
-public class UserService implements UserDetailsService{
+@Service("userSecurityservice")
+public class UserSecurityService implements UserDetailsService{
 
     @Resource
-    private com.tc.service.UserService userService;
+    private UserService userService;
 
     @Resource
     private UserRoleService userRoleService;
