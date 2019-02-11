@@ -65,8 +65,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     //在这里配置哪些页面不需要认证
     @Override
-    public void init(WebSecurity web) throws Exception {
-        super.init(web);
+    public void configure(WebSecurity web) throws Exception {
+        super.configure(web);
         web.ignoring().antMatchers("/","/noAuthenticate");
     }
 
