@@ -29,6 +29,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
+*灵感来源
+* https://blog.csdn.net/Canon_in_D_Major/article/details/79688441
+*/
+
+
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
