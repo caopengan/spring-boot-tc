@@ -3,6 +3,7 @@ package com.tc.config;
 import com.tc.component.AccessDecisionManagerImpl;
 import com.tc.component.FilterInvocationSecurityMetadataSourceImpl;
 import com.tc.component.MyAccessDeniedHandler;
+import com.tc.serviceImpl.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -37,8 +38,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.userDetailsService();
     }
 
+//    @Autowired
+//    private UserDetailsService userDetailsService;
+
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserSecurityService userSecurityService;
 
     //根据一个url请求，获得访问它所需要的roles权限
     @Autowired
@@ -55,14 +59,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**定义认证用户信息获取来源，密码校验规则等*/
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        super.configure(auth);
-        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        super.configure(auth);
+        auth.userDetailsService(userSecurityService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     //在这里配置哪些页面不需要认证
     @Override
     public void init(WebSecurity web) throws Exception {
-//        super.init(web);
+        super.init(web);
         web.ignoring().antMatchers("/","/noAuthenticate");
     }
 
@@ -75,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             public <O extends FilterSecurityInterceptor> O postProcess(O o) {
                 o.setSecurityMetadataSource(myFilterInvocationSecurityMetadataSource);
                 o.setAccessDecisionManager(myAccessDecisionManager);
-                return null;
+                return o;
             }
         }).and().formLogin().loginPage("/login").usernameParameter("userName").passwordParameter("password").permitAll()
                 .failureHandler(new AuthenticationFailureHandler() {
