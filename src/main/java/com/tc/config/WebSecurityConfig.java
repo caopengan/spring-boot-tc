@@ -4,6 +4,7 @@ import com.tc.component.AccessDecisionManagerImpl;
 import com.tc.component.FilterInvocationSecurityMetadataSourceImpl;
 import com.tc.component.MyAccessDeniedHandler;
 import com.tc.serviceImpl.UserSecurityService;
+import com.tc.systemUtils.MD5PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -67,14 +68,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);
-        auth.userDetailsService(userSecurityService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userSecurityService).passwordEncoder(new MD5PasswordEncoder());//new BCryptPasswordEncoder
     }
 
     //在这里配置哪些页面不需要认证
     @Override
     public void configure(WebSecurity web) throws Exception {
         super.configure(web);
-        web.ignoring().antMatchers("/","/noAuthenticate");
+        web.ignoring().antMatchers("/login","/error","/favicon.ico","/shop/index","/css/**","/js/**","/images/**","/layui/**");
     }
 
     /**定义安全策略*/

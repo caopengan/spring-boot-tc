@@ -21,6 +21,10 @@ spring:
         testOnReturn: false
         poolPreparedStatements: true
         maxOpenPreparedStatements: 20
+    mvc:
+      view:
+        prefix: /
+        suffix: .html
 
 
 mybatis:
@@ -34,6 +38,8 @@ logging:
   level:
     com.tc.mapper:
                   debug
+
+
 
 
 
